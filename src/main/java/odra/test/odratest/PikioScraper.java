@@ -17,15 +17,20 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class PikioCrawler {
+public class PikioScraper {
 
 
-
-    public Document openURL(String urlStr) throws IOException {
+    /**
+     * Opens the URL and returns a parsed JSoup Document
+     *
+     * @param urlStr the url to open
+     * @return A parsed JSoup Document with the content of the HTML page
+     * @throws IOException
+     */
+    private Document openURL(String urlStr) throws IOException {
         URL url = new URL(urlStr);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
-
         con.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
 
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -39,17 +44,19 @@ public class PikioCrawler {
         con.disconnect();
 
         String siteContent = content.toString();
-        return  Jsoup.parse(siteContent);
+        return Jsoup.parse(siteContent);
 
     }
 
-
-    public List<String> newsLinkList(){
+    /**
+     * Scrapes all URL's of the current news articles on the piko.pl landing page
+     * @return
+     */
+    public List<String> getNewsUrlList() {
 
         try {
-           Document doc = openURL("https://pikio.pl");
-
-           List<String> links = new ArrayList<>();
+            Document doc = openURL("https://pikio.pl");
+            List<String> links = new ArrayList<>();
             for (Element e : doc.body().getElementsByClass("news-item")) {
                 links.add(e.getElementsByTag("a").attr("href"));
             }
@@ -62,7 +69,14 @@ public class PikioCrawler {
 
     }
 
-    public Article crawl(String url) throws IOException {
+    /**
+     * Extracts information of a pikio.pl news article into a @{@link Article} object
+     *
+     * @param url The URL of the news article
+     * @return An Article Object with the information from the HTML page according to the URL
+     * @throws IOException
+     */
+    public Article scrape(String url) throws IOException {
 
         Document doc = openURL(url);
 
