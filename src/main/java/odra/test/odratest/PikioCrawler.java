@@ -47,7 +47,7 @@ public class PikioCrawler {
     public List<String> newsLinkList(){
 
         try {
-           Document doc = openURL("https://pikio.pl/8-rocznica-smolenska-niemcy-loty/");
+           Document doc = openURL("https://pikio.pl");
 
            List<String> links = new ArrayList<>();
             for (Element e : doc.body().getElementsByClass("news-item")) {
