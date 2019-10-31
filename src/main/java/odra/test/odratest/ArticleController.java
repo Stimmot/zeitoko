@@ -47,4 +47,13 @@ public class ArticleController {
     }
 
 
+    @GetMapping(value = "/")
+    public String empty() throws IOException {
+
+
+        return "<h1>No route found. Please go to /spiegel or /pikio</h1>";
+
+    }
+
+
 }
