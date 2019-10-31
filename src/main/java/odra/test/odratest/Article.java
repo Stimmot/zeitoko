@@ -18,5 +18,5 @@ public class Article {
     private String topic;
     private String link;
     private Date crawlDate;
-    private Date creationDate;
+    private String creationDate;
 }

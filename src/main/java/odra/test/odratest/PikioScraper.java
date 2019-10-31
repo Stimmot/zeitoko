@@ -17,41 +17,16 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class PikioScraper {
+public class PikioScraper extends Scraper{
 
 
-    /**
-     * Opens the URL and returns a parsed JSoup Document
-     *
-     * @param urlStr the url to open
-     * @return A parsed JSoup Document with the content of the HTML page
-     * @throws IOException
-     */
-    private Document openURL(String urlStr) throws IOException {
-        URL url = new URL(urlStr);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        con.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
-        String inputLine;
-        StringBuffer content = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            content.append(inputLine);
-        }
-        in.close();
-        con.disconnect();
-
-        String siteContent = content.toString();
-        return Jsoup.parse(siteContent);
-
-    }
 
     /**
      * Scrapes all URL's of the current news articles on the piko.pl landing page
      * @return
      */
+    @Override
     public List<String> getNewsUrlList() {
 
         try {
