@@ -1,9 +1,9 @@
 version: '3'
 services:
   odra-pikio-scraper:
-    image: pikio-scraper
+    image: ddmr/odra-test
   odra-scraper-controller:
-    image: odra-scraper-controller
+    image: ddmr/odra-scraper-controller
     ports:
       - "8080:8080"
     depends_on:
