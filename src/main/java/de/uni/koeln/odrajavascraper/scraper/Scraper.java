@@ -1,4 +1,4 @@
-package odra.test.odratest;
+package de.uni.koeln.odrajavascraper.scraper;
 
 import com.rometools.rome.io.FeedException;
 import org.jsoup.Jsoup;
@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 

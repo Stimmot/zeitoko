@@ -1,4 +1,4 @@
-package odra.test.odratest;
+package de.uni.koeln.odrajavascraper.scraper;
 
 
 import com.rometools.rome.feed.synd.SyndEntry;
@@ -6,6 +6,7 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
+import de.uni.koeln.odrajavascraper.entities.Article;
 import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Service;
 
@@ -26,15 +27,21 @@ public class SpiegelScraper extends Scraper {
         Article article = new Article();
 
         String headline = doc.body().getElementsByClass("headline-intro").text() + " - " + doc.body().getElementsByClass("headline").text();
-        if(headline.contains("Exklusiv für Abonnenten")){
+        if (headline.contains("Exklusiv für Abonnenten")) {
             return null;
         }
 
         String textBody = doc.body().getElementsByTag("p").text();
 
         String author = doc.body().getElementsByClass("author").text();
-        author = author.replaceAll("Von","").replaceAll(" und ",", ");
-        String topic = doc.body().getElementsByClass("current-channel-name").get(0).text();
+        author = author.replaceAll("Von", "").replaceAll(" und ", ", ");
+        String topic = "";
+        try {
+            topic = doc.body().getElementsByClass("current-channel-name").get(0).text();
+
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("No topic found");
+        }
         String creationDate = doc.body().getElementsByClass("article-function-date").text();
 
         article.setLink(url);
@@ -47,7 +54,6 @@ public class SpiegelScraper extends Scraper {
         article.setAuthor(author);
         article.setLink(url);
         article.setTopic(topic);
-
 
 
         return article;
@@ -78,7 +84,6 @@ public class SpiegelScraper extends Scraper {
         }
         return null;
     }
-
 
 
 }

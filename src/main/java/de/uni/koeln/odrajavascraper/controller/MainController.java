@@ -1,7 +1,9 @@
-package odra.test.odratest;
+package de.uni.koeln.odrajavascraper.controller;
 
 
-import com.rometools.rome.io.FeedException;
+import de.uni.koeln.odrajavascraper.entities.Article;
+import de.uni.koeln.odrajavascraper.scraper.PikioScraper;
+import de.uni.koeln.odrajavascraper.scraper.SpiegelScraper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class ArticleController {
+public class MainController {
 
     @Autowired
     PikioScraper pikioScraper;

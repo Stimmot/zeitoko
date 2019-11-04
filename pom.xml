@@ -8,11 +8,11 @@
 		<version>2.1.8.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>odra.test</groupId>
-	<artifactId>odra-test</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>odra-test</name>
-	<description>Demo project for ODRA</description>
+	<groupId>de.uni.koeln</groupId>
+	<artifactId>odrajavascraper</artifactId>
+	<version>1.0</version>
+	<name>odrajavascraper</name>
+	<description>Scraper implementations in Java for project ODRA</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -22,12 +22,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -47,13 +41,6 @@
 			<version>1.5.0</version>
 		</dependency>
 
-
-		<dependency>
-			<groupId>rome</groupId>
-			<artifactId>rome</artifactId>
-			<version>1.0</version>
-		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -61,14 +48,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>dockerfile-maven-plugin</artifactId>
-				<version>1.4.9</version>
-				<configuration>
-					<repository>ddmr/odra-test</repository>
-				</configuration>
 			</plugin>
 		</plugins>
         <finalName>odra-test</finalName>

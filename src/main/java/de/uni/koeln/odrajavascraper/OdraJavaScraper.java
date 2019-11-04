@@ -1,13 +1,13 @@
-package odra.test.odratest;
+package de.uni.koeln.odrajavascraper;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class OdraTestApplication {
+public class OdraJavaScraper {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OdraTestApplication.class, args);
+		SpringApplication.run(OdraJavaScraper.class, args);
 	}
 
 }
