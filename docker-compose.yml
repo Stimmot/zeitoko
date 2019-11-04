@@ -1,0 +1,21 @@
+version: '3'
+services:
+  odra-pikio-scraper:
+    image: pikio-scraper
+  odra-scraper-controller:
+    image: odra-scraper-controller
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "odra-database"
+      - "odra-pikio-scraper"
+  odra-database:
+    image: mysql:latest
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    environment:
+       MYSQL_DATABASE: 'odra'
+       MYSQL_USER: 'odra'
+       MYSQL_PASSWORD: 'odra'
+       MYSQL_ROOT_PASSWORD: 'odra'
+    ports:
+      - "3306:3306"
