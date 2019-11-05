@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Kontrolliert welche Daten bei welchem Pfad aufruf ausgegeben werden
+ */
 @RestController
 public class MainController {
 

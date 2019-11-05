@@ -1,6 +1,7 @@
 package de.uni.koeln.odrajavascraper.scraper;
 
 import com.rometools.rome.io.FeedException;
+import de.uni.koeln.odrajavascraper.entities.Article;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -41,8 +42,21 @@ public abstract class Scraper {
     }
 
 
-
+    /**
+     * Scrapes all URL's of the current news articles
+     * @return A list of urls
+     */
     public abstract List<String> getNewsUrlList() throws IOException, FeedException;
+
+
+    /**
+     * Extracts information of a news article into a @{@link Article} object
+     *
+     * @param url The URL of the news article
+     * @return An Article Object with the information from the HTML page according to the URL
+     * @throws IOException
+     */
+    public abstract Article scrape(String url) throws IOException, FeedException;
 
 
 }

@@ -3,6 +3,9 @@ package de.uni.koeln.odrajavascraper.entities;
 
 import java.util.Date;
 
+/**
+ * Einfache Datenklasse um die Artikel zu speichern
+ */
 public class Article {
     private String headline;
     private String textBody;

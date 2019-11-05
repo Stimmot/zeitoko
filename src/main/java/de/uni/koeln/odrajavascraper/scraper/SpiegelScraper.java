@@ -8,6 +8,8 @@ import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 import de.uni.koeln.odrajavascraper.entities.Article;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -20,30 +22,34 @@ import java.util.List;
 @Service
 public class SpiegelScraper extends Scraper {
 
+    @Override
     public Article scrape(String url) throws IOException {
 
         Document doc = openURL(url);
 
-        Article article = new Article();
-
+        //HEADLINE
         String headline = doc.body().getElementsByClass("headline-intro").text() + " - " + doc.body().getElementsByClass("headline").text();
-        if (headline.contains("Exklusiv für Abonnenten")) {
+        headline = headline.equals(" - ") ? "" : headline; // falls keine headline vorhanden ist und nur der Bidnestrich da steht
+        if (headline.contains("Exklusiv für Abonnenten")) { // falls eine PayWall existiert wird kein Artikel gespeichert
             return null;
         }
 
+        //TEXTBODY
         String textBody = doc.body().getElementsByTag("p").text();
 
+        //AUTHOR
         String author = doc.body().getElementsByClass("author").text();
-        author = author.replaceAll("Von", "").replaceAll(" und ", ", ");
-        String topic = "";
-        try {
-            topic = doc.body().getElementsByClass("current-channel-name").get(0).text();
+        author = author.replaceAll("Von", "").replaceAll(" und ", ", "); // Autoren String wird gereinigt
 
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("No topic found");
-        }
+        //TOPIC
+        Elements topicContainer = doc.body().getElementsByClass("current-channel-name");
+        String topic = topicContainer.size() > 0 ? topicContainer.get(0).text() : "";
+
+        //CREATIONDATE
         String creationDate = doc.body().getElementsByClass("article-function-date").text();
 
+
+        Article article = new Article();
         article.setLink(url);
         article.setHeadline(headline);
         article.setSource("https://www.spiegel.de");
@@ -68,7 +74,6 @@ public class SpiegelScraper extends Scraper {
             SyndFeed feed = input.build(new XmlReader(feedUrl));
 
             List<SyndEntry> entries = feed.getEntries();
-
             List<String> links = new ArrayList<>();
             for (SyndEntry entry : entries) {
                 links.add(entry.getLink());
