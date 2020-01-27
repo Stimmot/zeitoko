@@ -25,6 +25,8 @@ public class SpiegelScraper extends Scraper {
     @Override
     public Article scrape(String url) throws IOException {
 
+    	System.out.println(url);
+    	
         Document doc = openURL(url);
 
         //HEADLINE
